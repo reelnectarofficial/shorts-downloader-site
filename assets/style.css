@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9f9f9;
+  color: #333;
+}
+header, footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+}
+main {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+.tool-list .tool-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+.tool-card a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #e50914;
+  text-decoration: none;
+}
+.tool-section input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.tool-section button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  background: #e50914;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.result {
+  margin-top: 20px;
+  display: none;
+}
+.sidebar {
+  float: right;
+  width: 200px;
+  margin-left: 20px;
+}
+.native-ad {
+  margin: 20px 0;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .sidebar {
+    float: none;
+    width: 100%;
+    margin: 0;
+  }
+}
