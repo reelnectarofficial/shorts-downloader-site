@@ -48,24 +48,39 @@
     <p>&copy; 2025 ReelTools. All rights reserved.</p>
   </footer>
 
-  <script>
-    function loadDownloader() {
-      const url = document.getElementById('shortsURL').value.trim();
+ <script>
+  function loadDownloader() {
+    const url = document.getElementById('shortsURL').value.trim();
 
-      if (!url || (!url.includes('youtube.com/shorts') && !url.includes('youtu.be/'))) {
-        alert('Please enter a valid YouTube Shorts URL.');
-        return;
-      }
+    if (!url || (!url.includes('youtube.com/shorts') && !url.includes('youtu.be/'))) {
+      alert('Please enter a valid YouTube Shorts URL.');
+      return;
+    }
 
-      let videoID = '';
+    let videoID = '';
 
-      if (url.includes('youtube.com/shorts/')) {
-        videoID = url.split('/shorts/')[1]?.split('?')[0];
-      } else if (url.includes('youtu.be/')) {
-        videoID = url.split('youtu.be/')[1]?.split('?')[0];
-      }
+    if (url.includes('youtube.com/shorts/')) {
+      videoID = url.split('/shorts/')[1]?.split('?')[0];
+    } else if (url.includes('youtu.be/')) {
+      videoID = url.split('youtu.be/')[1]?.split('?')[0];
+    }
 
-      if (!videoID) {
+    if (!videoID) {
+      alert('Could not extract video ID. Please check the URL.');
+      return;
+    }
+
+    const redirectURL = `https://yt1s.ltd/en?q=https://youtube.com/watch?v=${videoID}`;
+    window.open(redirectURL, '_blank');
+
+    // Optional: show message below button
+    const msg = document.createElement('p');
+    msg.textContent = "Download opened in a new tab. Stay here for more tools!";
+    msg.style.color = "green";
+    document.querySelector('.tool-section').appendChild(msg);
+  }
+</script>
+
         alert('Could not extract video ID. Please check the URL.');
         return;
       }
