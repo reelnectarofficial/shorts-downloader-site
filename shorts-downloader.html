@@ -50,15 +50,27 @@
 
   <script>
     function loadDownloader() {
-      const url = document.getElementById('shortsURL').value;
+      const url = document.getElementById('shortsURL').value.trim();
 
-      if (!url.includes('youtube.com/shorts')) {
+      if (!url || (!url.includes('youtube.com/shorts') && !url.includes('youtu.be/'))) {
         alert('Please enter a valid YouTube Shorts URL.');
         return;
       }
 
-      const videoID = url.split('/shorts/')[1]?.split('?')[0];
-      const embedURL = `https://ssyoutube.com/watch?v=${videoID}`;
+      let videoID = '';
+
+      if (url.includes('youtube.com/shorts/')) {
+        videoID = url.split('/shorts/')[1]?.split('?')[0];
+      } else if (url.includes('youtu.be/')) {
+        videoID = url.split('youtu.be/')[1]?.split('?')[0];
+      }
+
+      if (!videoID) {
+        alert('Could not extract video ID. Please check the URL.');
+        return;
+      }
+
+      const embedURL = `https://yt1s.ltd/en?q=https://youtube.com/watch?v=${videoID}`;
 
       document.getElementById('downloaderFrame').src = embedURL;
       document.getElementById('iframeContainer').style.display = 'block';
