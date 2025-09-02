@@ -1,26 +1,27 @@
-function downloadShorts() {
-  const url = document.getElementById('shortsURL').value;
+function loadDownloader() {
+  const url = document.getElementById('shortsURL').value.trim();
 
-  if (!url.includes('youtube.com/shorts')) {
+  if (!url || (!url.includes('youtube.com/shorts') && !url.includes('youtu.be/'))) {
     alert('Please enter a valid YouTube Shorts URL.');
     return;
   }
 
-  // Extract video ID from Shorts URL
-  const videoID = url.split('/shorts/')[1]?.split('?')[0];
+  let videoID = '';
+
+  // Extract video ID from different formats
+  if (url.includes('youtube.com/shorts/')) {
+    videoID = url.split('/shorts/')[1]?.split('?')[0];
+  } else if (url.includes('youtu.be/')) {
+    videoID = url.split('youtu.be/')[1]?.split('?')[0];
+  }
 
   if (!videoID) {
-    alert('Invalid Shorts URL format.');
+    alert('Could not extract video ID. Please check the URL.');
     return;
   }
 
-  // Redirect to external downloader (e.g., ssyoutube)
-  const redirectURL = `https://ssyoutube.com/watch?v=${videoID}`;
-  window.open(redirectURL, '_blank');
+  const embedURL = `https://ssyoutube.com/watch?v=${videoID}`;
 
-  // Show result section with share/copy buttons
-  const downloadLink = document.getElementById('downloadLink');
-  downloadLink.href = redirectURL;
-  downloadLink.textContent = 'Open Download Page';
-  document.getElementById('resultSection').style.display = 'block';
+  document.getElementById('downloaderFrame').src = embedURL;
+  document.getElementById('iframeContainer').style.display = 'block';
 }
